@@ -1,14 +1,14 @@
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>fa', builtin.find_files, {})
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set("n", "<leader>fe", ":Telescope file_browser<CR>")
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>tf', builtin.find_files, {})
+vim.keymap.set('n', '<leader>tg', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
+vim.keymap.set("n", "<leader>te", ":Telescope file_browser<CR>")
+vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 
 -- Neotree
 vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-
-
+-- Neo format
+vim.api.nvim_set_keymap('n', '<leader>nf', ':Neoformat<CR>', { noremap = true, silent = true })
 
 -- Configure zero lsp, copied from
 -- https://lsp-zero.netlify.app/v4.x/tutorial.html#setup-lsp-zero
@@ -28,7 +28,7 @@ local lsp_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
   vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
   vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-  vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
+  vim.keymap.set({'n', 'x'}, 'ff', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
   vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 end
 
@@ -54,4 +54,19 @@ require('mason-lspconfig').setup({
 
 lsp_zero.setup_servers({'ts_ls', 'lua_ls', 'rust_analyzer'})
 
-vim.api.nvim_set_keymap('n', '<leader>ff', ':Neoformat<CR>', { noremap = true, silent = true })
+-- Setup auto complete
+local cmp = require('cmp')
+
+cmp.setup({
+  sources = {
+    {name = 'nvim_lsp'},
+  },
+  snippet = {
+    expand = function(args)
+      -- You need Neovim v0.10 to use vim.snippet
+      vim.snippet.expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({}),
+})
+
