@@ -11,8 +11,15 @@ vim.keymap.set("n", "<leader>wp", vim.cmd.bprevious)
 vim.keymap.set("n", "<leader>ln", ":set number<CR>")
 vim.keymap.set("n", "<leader>bc", ":%bd|e#<CR>")
 
+-- Folding settings
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
+-- This sets the default fold level
+vim.opt.foldlevel = 99
 
+-- This sets the max the code is allowed to fold.
+vim.opt.foldnestmax = 2
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
