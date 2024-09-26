@@ -5,11 +5,6 @@ vim.keymap.set('n', '<leader>tb', builtin.buffers, {})
 vim.keymap.set("n", "<leader>te", ":Telescope file_browser<CR>")
 vim.keymap.set('n', '<leader>th', builtin.help_tags, {})
 
--- Neotree
-vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
--- Neo format
-vim.api.nvim_set_keymap('n', '<leader>nf', ':Neoformat<CR>', { noremap = true, silent = true })
-
 -- Configure zero lsp, copied from
 -- https://lsp-zero.netlify.app/v4.x/tutorial.html#setup-lsp-zero
 local lsp_zero = require('lsp-zero')
@@ -70,6 +65,8 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({}),
 })
 
+-- Neotree
+vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
 
 require('neo-tree').setup({
     window = {
@@ -91,3 +88,17 @@ require('neo-tree').setup({
         }
     }
 })
+
+
+-- Neo format
+vim.api.nvim_set_keymap('n', '<leader>nf', ':Neoformat<CR>', { noremap = true, silent = true })
+
+-- Neoformat use local prettier rather than global one.
+vim.g.neoformat_try_node_exe = 1
+
+-- Neoformat JS
+-- npm install -g prettier required
+vim.g.neoformat_enabled_javascript = { 'prettier' }
+vim.g.neoformat_enabled_json = { 'prettier' }
+
+
