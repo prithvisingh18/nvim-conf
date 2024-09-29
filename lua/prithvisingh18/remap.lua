@@ -5,7 +5,7 @@ vim.opt.hlsearch = true
 -- vim.keymap.set("n", "<leader>nh", ":set nohlsearch<CR>")
 
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>ls", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>ls", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>wn", vim.cmd.bnext)
 vim.keymap.set("n", "<leader>wp", vim.cmd.bprevious)
 vim.keymap.set("n", "<leader>ln", ":set number<CR>")
