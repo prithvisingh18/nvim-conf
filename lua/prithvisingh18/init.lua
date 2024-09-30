@@ -11,6 +11,6 @@ require("prithvisingh18.plugin_remap")
 
 
 vim.opt.termguicolors = true
-vim.cmd.colorscheme('tokyonight')
+vim.cmd.colorscheme("tokyonight")
 
 print("Configured.")
