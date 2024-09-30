@@ -81,7 +81,8 @@ require("mason-lspconfig").setup({
     },
 })
 
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "rust_analyzer" })
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "rust_analyzer", "pylsp" })
 
 -- Setup auto complete
 local cmp = require("cmp")
@@ -106,6 +107,13 @@ vim.api.nvim_set_keymap("n", "<leader>nf", ":Neoformat<CR>", { noremap = true, s
 vim.g.neoformat_try_node_exe = 1
 
 -- Neoformat JS
+-- https://prettier.io/docs/en/vim
 -- npm install -g prettier required
 vim.g.neoformat_enabled_javascript = { "prettier" }
 vim.g.neoformat_enabled_json = { "prettier" }
+
+
+-- https://pypi.org/project/autopep8/
+-- pip install --upgrade autopep8
+vim.g.neoformat_enabled_python = { "autopep8" }
+
