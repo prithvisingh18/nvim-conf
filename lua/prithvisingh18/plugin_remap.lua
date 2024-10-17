@@ -109,6 +109,7 @@ vim.g.neoformat_try_node_exe = 1
 -- Neoformat JS
 -- https://prettier.io/docs/en/vim
 -- npm install -g prettier required
+vim.g.neoformat_enabled_typescript = { "prettier" }
 vim.g.neoformat_enabled_javascript = { "prettier" }
 vim.g.neoformat_enabled_json = { "prettier" }
 
