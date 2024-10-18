@@ -25,3 +25,10 @@ vim.opt.foldlevel = 99
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+
+-- Settings for tabs.
+vim.keymap.set("n", "<leader><Tab>n", ":tabnew<CR>")
+vim.keymap.set("n", "<leader><Tab>p", ":tabnext<CR>")
+vim.keymap.set("n", "<leader><Tab>P", ":tabprev<CR>")
+vim.keymap.set("n", "<leader><Tab>c", ":tabclose<CR>")
+
