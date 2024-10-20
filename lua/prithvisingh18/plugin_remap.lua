@@ -8,6 +8,11 @@ vim.opt.termguicolors = true
 
 -- Neotree
 vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
+vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem<CR>")
+vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
+vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
+
 
 require("neo-tree").setup({
     window = {
