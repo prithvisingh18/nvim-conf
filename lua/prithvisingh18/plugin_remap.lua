@@ -38,10 +38,12 @@ require("neo-tree").setup({
 
 
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>tf", builtin.find_files, {})
-vim.keymap.set("n", "<leader>tg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>tb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>te", ":Telescope file_browser<CR>")
+vim.keymap.set("n", "<leader>tf", ":Telescope find_files theme=dropdown<CR>")
+vim.keymap.set("n", "<leader>tg", ":Telescope live_grep theme=ivy<CR>")
+vim.keymap.set("n", "<leader>tb", ":Telescope buffers theme=dropdown<CR>")
+vim.keymap.set("n", "<leader>te", ":Telescope file_browser theme=ivy<CR>")
+vim.keymap.set("n", "<leader>tj", ":Telescope jumplist theme=dropdown<CR>")
+vim.keymap.set("n", "<leader>ts", ":Telescope git_status theme=ivy<CR>")
 vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
 
 -- Configure zero lsp, copied from
