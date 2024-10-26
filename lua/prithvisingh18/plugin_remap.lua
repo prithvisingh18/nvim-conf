@@ -125,3 +125,10 @@ vim.g.neoformat_enabled_json = { "prettier" }
 -- pip install --upgrade autopep8
 vim.g.neoformat_enabled_python = { "autopep8" }
 
+
+-- Theme settings
+-- vim.cmd.colorscheme("tokyonight-night")
+vim.cmd.colorscheme("cyberdream")
+
+
+
