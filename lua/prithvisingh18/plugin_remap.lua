@@ -3,15 +3,12 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- optionally enable 24-bit colour
-vim.opt.termguicolors = true
-
 -- Neotree
-vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem<CR>")
-vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
-vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
+-- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
+vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers float<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem float<CR>")
+vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status float<CR>")
+vim.keymap.set("n", "<leader>ba", ":Neotree focus last float<CR>")
 
 
 require("neo-tree").setup({

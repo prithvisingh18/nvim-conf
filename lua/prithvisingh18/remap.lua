@@ -17,7 +17,7 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 
 -- This sets the default fold level
-vim.opt.foldlevel = 99
+vim.opt.foldlevel = 0
 
 -- This sets the max the code is allowed to fold.
 -- vim.opt.foldnestmax = 2
@@ -27,8 +27,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- Settings for tabs.
-vim.keymap.set("n", "<leader><Tab>n", ":tabnew<CR>")
-vim.keymap.set("n", "<leader><Tab>p", ":tabnext<CR>")
-vim.keymap.set("n", "<leader><Tab>P", ":tabprev<CR>")
-vim.keymap.set("n", "<leader><Tab>c", ":tabclose<CR>")
+vim.keymap.set("n", "<leader><Tab>c", ":tabnew<CR>")
+vim.keymap.set("n", "<leader><Tab>n", ":tabnext<CR>")
+vim.keymap.set("n", "<leader><Tab>p", ":tabprev<CR>")
+vim.keymap.set("n", "<leader><Tab>x", ":tabclose<CR>")
 
