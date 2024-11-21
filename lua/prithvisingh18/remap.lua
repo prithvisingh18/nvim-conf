@@ -1,6 +1,9 @@
 -- Enable hlsearch by default
 vim.opt.hlsearch = true
 
+vim.opt.wrap = false
+
+
 -- Find a way to stop highlight search, below method did not work for some reason.
 -- vim.keymap.set("n", "<leader>nh", ":set nohlsearch<CR>")
 
