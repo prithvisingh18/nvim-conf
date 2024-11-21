@@ -1,19 +1,25 @@
 -- Neotree setup
 -- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
 
--- Neotree
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers float<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem float<CR>")
-vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status float<CR>")
-vim.keymap.set("n", "<leader>ba", ":Neotree focus last float<CR>")
+vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers right reveal<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem<CR>")
+vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
+vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
 
 
 require("neo-tree").setup({
+    filesystem = {
+        follow_current_file = { enabled = true },             -- Automatically focus on the current file in Neo-tree
+        hijack_netrw_behavior = "open_default", -- Replace netrw with Neo-tree
+        use_libuv_file_watcher = true,          -- Watch for changes in the filesystem
+    },
     window = {
+        position = "left",
         mappings = {
+            ["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
             ["J"] = function(state)
                 local tree = state.tree
                 local node = tree:get_node()
@@ -33,7 +39,7 @@ require("neo-tree").setup({
 })
 
 
-
+-- Telescope setup
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>tf", ":Telescope find_files theme=dropdown<CR>")
 vim.keymap.set("n", "<leader>tg", ":Telescope live_grep theme=ivy<CR>")
@@ -43,10 +49,10 @@ vim.keymap.set("n", "<leader>tj", ":Telescope jumplist theme=dropdown<CR>")
 vim.keymap.set("n", "<leader>ts", ":Telescope git_status theme=ivy<CR>")
 vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
 
+
 -- Configure zero lsp, copied from
 -- https://lsp-zero.netlify.app/v4.x/tutorial.html#setup-lsp-zero
 local lsp_zero = require("lsp-zero")
-
 
 -- lsp_attach is where you enable features that only work
 -- if there is a language server active in the file
@@ -124,8 +130,31 @@ vim.g.neoformat_enabled_python = { "autopep8" }
 
 
 -- Theme settings
--- vim.cmd.colorscheme("tokyonight-night")
+-- require("tokyonight").setup({
+--     style = "night",
+--     transparent = true,
+--     plugins = {
+--         auto = true
+--     }
+-- })
+-- vim.cmd.colorscheme("tokyonight")
+
+require("cyberdream").setup({
+    transparent = true,
+    italic_comments = true,
+    theme = {
+        saturation = 0.7
+    },
+
+    -- Disable or enable colorscheme extensions
+    extensions = {
+        telescope = true,
+        notify = true,
+        mini = true,
+    },
+})
+
 vim.cmd.colorscheme("cyberdream")
 
-
-
+-- Git diff view
+vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")

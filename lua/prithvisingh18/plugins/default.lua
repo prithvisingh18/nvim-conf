@@ -20,7 +20,7 @@ return {
         "folke/tokyonight.nvim",
         lazy = false,
         priority = 1000,
-        opts = { style = "night" },
+        opts = {},
     },
     {
         "scottmckendry/cyberdream.nvim",
@@ -46,5 +46,15 @@ return {
     },
     {
         "mg979/vim-visual-multi"
+    },
+    {
+        "sindrets/diffview.nvim"
+    },
+    {
+        'sindrets/winshift.nvim',
+        keys = {
+            { '<leader>wm', '<cmd>WinShift<cr>', desc = 'Move window' },
+        },
+        config = true,
     }
 }
