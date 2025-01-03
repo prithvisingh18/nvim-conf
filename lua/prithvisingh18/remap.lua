@@ -35,3 +35,8 @@ vim.keymap.set("n", "<leader><Tab>n", ":tabnext<CR>")
 vim.keymap.set("n", "<leader><Tab>p", ":tabprev<CR>")
 vim.keymap.set("n", "<leader><Tab>x", ":tabclose<CR>")
 
+-- Toggle inlay hints with a shortcut
+vim.keymap.set('n', '<leader>ih', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = "Toggle Inlay Hints" })
+
