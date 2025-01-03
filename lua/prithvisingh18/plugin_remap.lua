@@ -9,7 +9,6 @@ vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem<CR>")
 vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
 vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
 
-
 require("neo-tree").setup({
     filesystem = {
         follow_current_file = { enabled = true },             -- Automatically focus on the current file in Neo-tree
@@ -92,7 +91,7 @@ require("mason-lspconfig").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "rust_analyzer", "pylsp" })
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer" })
 
 -- Setup auto complete
 local cmp = require("cmp")
