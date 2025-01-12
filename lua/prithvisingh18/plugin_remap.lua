@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
+
 -- Neotree setup
 -- disable netrw at the very start of your init.lua
 --vim.g.loaded_netrw = 1
@@ -5,7 +7,7 @@
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
 vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers right reveal<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem position=float<CR>")
 vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
 vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
 
@@ -16,7 +18,7 @@ require("neo-tree").setup({
         use_libuv_file_watcher = true,          -- Watch for changes in the filesystem
     },
     window = {
-        position = "left",
+        position = "float",
         mappings = {
             ["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
             ["J"] = function(state)
@@ -43,7 +45,7 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>tf", ":Telescope find_files theme=dropdown<CR>")
 vim.keymap.set("n", "<leader>tg", ":Telescope live_grep theme=ivy<CR>")
 vim.keymap.set("n", "<leader>tb", ":Telescope buffers theme=dropdown<CR>")
-vim.keymap.set("n", "<leader>te", ":Telescope file_browser theme=ivy<CR>")
+vim.keymap.set("n", "<leader>te", ":Telescope file_browser<CR>")
 vim.keymap.set("n", "<leader>tj", ":Telescope jumplist theme=dropdown<CR>")
 vim.keymap.set("n", "<leader>ts", ":Telescope git_status theme=ivy<CR>")
 vim.keymap.set("n", "<leader>th", builtin.help_tags, {})
