@@ -51,7 +51,7 @@ return {
 					"python",
 				},
 				sync_install = false,
-                auto_install = true,
+				auto_install = true,
 				highlight = { enable = true },
 				indent = { enable = true },
 			})
@@ -73,6 +73,17 @@ return {
 		},
 		config = true,
 	},
+	{
+		"folke/zen-mode.nvim",
+		config = function()
+			require("zen-mode").setup({
+				window = {
+					width = 100, -- Adjust the width to your liking
+				},
+			})
+		end,
+	},
+
 	-- {
 	-- 	"mrcjkb/rustaceanvim",
 	-- 	version = "^5", -- Recommended
