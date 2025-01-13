@@ -79,10 +79,6 @@ return {
 			require("zen-mode").setup({
 				window = {
 					width = 100, -- Adjust the width to your liking
-					options = {
-						number = false, -- Disable line numbers
-						relativenumber = false, -- Disable relative numbers
-					},
 				},
 			})
 		end,

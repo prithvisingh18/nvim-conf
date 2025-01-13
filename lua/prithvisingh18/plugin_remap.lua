@@ -6,7 +6,7 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 --vim.g.loaded_netrwPlugin = 1
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers right reveal<CR>")
+vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers left reveal<CR>")
 vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem position=float<CR>")
 vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
 vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
