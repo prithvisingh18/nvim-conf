@@ -49,6 +49,7 @@ return {
 					"html",
 					"rust",
 					"python",
+                    "zig"
 				},
 				sync_install = false,
 				auto_install = true,
