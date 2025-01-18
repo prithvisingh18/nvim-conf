@@ -93,7 +93,7 @@ require("mason-lspconfig").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer" })
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls" })
 
 -- Setup auto complete
 local cmp = require("cmp")
