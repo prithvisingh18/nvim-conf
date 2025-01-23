@@ -131,3 +131,8 @@ vim.cmd.colorscheme("catppuccin-mocha")
 -- Git diff view
 vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")
 
+-- Setup vertical indentation lines
+require("ibl").setup()
+
+
+
