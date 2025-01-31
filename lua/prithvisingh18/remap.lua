@@ -5,7 +5,7 @@ vim.opt.wrap = false
 
 
 -- Find a way to stop highlight search, below method did not work for some reason.
-vim.keymap.set("n", "<leader>h", ":noh<CR>")
+vim.keymap.set("n", "<esc>.", ":noh<cr>")
 
 vim.g.mapleader = " "
 -- vim.keymap.set("n", "<leader>ls", vim.cmd.Ex)
@@ -20,7 +20,8 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 
 -- This sets the default fold level
--- vim.opt.foldlevel = 0
+vim.opt.foldlevel = 0
+vim.opt.foldlevelstart = 99
 
 
 -- This sets the max the code is allowed to fold.

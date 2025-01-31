@@ -90,7 +90,7 @@ require("mason-lspconfig").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls" })
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint" })
 
 -- Setup auto complete
 local cmp = require("cmp")
@@ -160,4 +160,3 @@ require("neoscroll").setup({
 		"CursorMoved",
 	},
 })
-
