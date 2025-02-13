@@ -35,6 +35,9 @@ require("neo-tree").setup({
 				local renderer = require("neo-tree.ui.renderer")
 				renderer.focus_node(state, siblings[1]:get_id())
 			end,
+            -- remove default mapping to b and change it to B
+			["b"] = false,
+			["rb"] = "rename_basename",
 		},
 	},
 })
