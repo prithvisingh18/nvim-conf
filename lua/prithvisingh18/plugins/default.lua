@@ -18,23 +18,18 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
-	{
-		"folke/tokyonight.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = {},
-	},
-	{
-		"scottmckendry/cyberdream.nvim",
-		lazy = false,
-		priority = 1000,
-	},
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {},
+	-- },
+	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
 			local configs = require("nvim-treesitter.configs")
-
 			configs.setup({
 				ensure_installed = {
 					"c",
@@ -49,7 +44,8 @@ return {
 					"html",
 					"rust",
 					"python",
-                    "zig"
+					"zig",
+					-- "toml"
 				},
 				sync_install = false,
 				auto_install = true,
@@ -79,12 +75,29 @@ return {
 		config = function()
 			require("zen-mode").setup({
 				window = {
-					width = 100, -- Adjust the width to your liking
+					width = 120, -- Adjust the width to your liking
 				},
 			})
 		end,
 	},
-
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {},
+	},
+	{
+		"David-Kunz/gen.nvim",
+		opts = {
+			model = "deepseek-r1:8b",
+			display_mode = "horizontal-split",
+			show_prompt = "Full",
+			show_model = true,
+		},
+	},
+	{
+		"karb94/neoscroll.nvim",
+		opts = {},
+	},
 	-- {
 	-- 	"mrcjkb/rustaceanvim",
 	-- 	version = "^5", -- Recommended
