@@ -18,7 +18,7 @@ require("neo-tree").setup({
 		use_libuv_file_watcher = true, -- Watch for changes in the filesystem
 	},
 	window = {
-		position = "float",
+		position = "left",
 		mappings = {
 			["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
 			["J"] = function(state)
@@ -126,7 +126,7 @@ vim.g.neoformat_enabled_json = { "prettier" }
 vim.g.neoformat_enabled_python = { "autopep8" }
 
 -- Theme
-vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd.colorscheme("tokyonight-night")
 
 -- Git diff view
 vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")

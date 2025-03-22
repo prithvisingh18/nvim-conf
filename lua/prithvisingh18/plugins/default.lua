@@ -18,13 +18,13 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {},
-	-- },
-	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
+	-- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
