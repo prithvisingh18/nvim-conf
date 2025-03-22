@@ -7,7 +7,7 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
 vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers left reveal<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem position=float<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem left reveal<CR>")
 vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
 vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
 
@@ -154,9 +154,19 @@ require("neoscroll").setup({
 	easing = "linear", -- Default easing function
 	pre_hook = nil, -- Function to run before the scrolling animation starts
 	post_hook = nil, -- Function to run after the scrolling animation ends
-	performance_mode = false, -- Disable "Performance Mode" on all buffers.
+	performance_mode = true, -- Disable "Performance Mode" on all buffers.
 	ignored_events = { -- Events ignored while scrolling
 		"WinScrolled",
 		"CursorMoved",
 	},
 })
+
+neoscroll = require('neoscroll')
+local keymap = {
+  ["<C-s>"] = function() neoscroll.scroll(-0.5, { move_cursor=true; duration = 50 }) end;
+  ["<C-x>"] = function() neoscroll.scroll(0.5, { move_cursor=true; duration = 50 }) end;
+}
+local modes = { 'n', 'v', 'x' }
+for key, func in pairs(keymap) do
+  vim.keymap.set(modes, key, func)
+end
