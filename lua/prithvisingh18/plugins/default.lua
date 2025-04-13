@@ -86,11 +86,14 @@ return {
 		opts = {},
 	},
 	{
-		"David-Kunz/gen.nvim",
+		-- "David-Kunz/gen.nvim",
+		-- "prithvisingh18/gen.nvim",
+		dir = "~/Documents/ps_workspace/gen.nvim",
+		branch = "no-split",
 		opts = {
 			model = "deepseek-r1:8b",
-			display_mode = "horizontal-split",
-			show_prompt = "Full",
+			display_mode = "no-split",
+			show_prompt = "full",
 			show_model = true,
 		},
 	},
@@ -103,20 +106,26 @@ return {
 	-- 	version = "^5", -- Recommended
 	-- 	lazy = false, -- This plugin is already lazy
 	-- },
-	{
-		"romgrk/barbar.nvim",
-		dependencies = {
-			"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
-			"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
-		},
-		init = function()
-			vim.g.barbar_auto_setup = false
-		end,
-		opts = {
-			sidebar_filetypes = {
-				["neo-tree"] = { event = "BufWipeout" },
-			},
-		},
-		version = "^1.0.0", -- optional: only update when a new 1.x version is released
-	},
+	-- {
+	-- 	"romgrk/barbar.nvim",
+	-- 	dependencies = {
+	-- 		"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
+	-- 		"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
+	-- 	},
+	-- 	init = function()
+	-- 		vim.g.barbar_auto_setup = false
+	-- 	end,
+	-- 	opts = {
+	-- 		sidebar_filetypes = {
+	-- 			["neo-tree"] = { event = "BufWipeout" },
+	-- 		},
+	-- 	},
+	-- 	version = "^1.0.0", -- optional: only update when a new 1.x version is released
+	-- },
+	{ "nvim-telescope/telescope-ui-select.nvim" },
+	-- { "augmentcode/augment.vim" },
+	-- {
+	-- 	"Exafunction/codeium.vim",
+	-- 	event = "BufEnter",
+	-- },
 }

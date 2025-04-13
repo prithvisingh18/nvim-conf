@@ -161,12 +161,56 @@ require("neoscroll").setup({
 	},
 })
 
-neoscroll = require('neoscroll')
+neoscroll = require("neoscroll")
 local keymap = {
-  ["<C-s>"] = function() neoscroll.scroll(-0.5, { move_cursor=true; duration = 50 }) end;
-  ["<C-x>"] = function() neoscroll.scroll(0.5, { move_cursor=true; duration = 50 }) end;
+	["<C-s>"] = function()
+		neoscroll.scroll(-0.5, { move_cursor = true, duration = 50 })
+	end,
+	["<C-x>"] = function()
+		neoscroll.scroll(0.5, { move_cursor = true, duration = 50 })
+	end,
 }
-local modes = { 'n', 'v', 'x' }
+local modes = { "n", "v", "x" }
 for key, func in pairs(keymap) do
-  vim.keymap.set(modes, key, func)
+	vim.keymap.set(modes, key, func)
 end
+
+-- Barbar mappings
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- Move to previous/next
+map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
+map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+
+-- Telescope ui select setup
+-- This is your opts table
+require("telescope").setup({
+	extensions = {
+		["ui-select"] = {
+			require("telescope.themes").get_dropdown({
+				-- even more opts
+			}),
+
+			-- pseudo code / specification for writing custom displays, like the one
+			-- for "codeactions"
+			-- specific_opts = {
+			--   [kind] = {
+			--     make_indexed = function(items) -> indexed_items, width,
+			--     make_displayer = function(widths) -> displayer
+			--     make_display = function(displayer) -> function(e)
+			--     make_ordinal = function(e) -> string
+			--   },
+			--   -- for example to disable the custom builtin "codeactions" display
+			--      do the following
+			--   codeactions = false,
+			-- }
+		},
+	},
+})
+-- To get ui-select loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require("telescope").load_extension("ui-select")
+
+-- Augment code confuguration
+vim.g.augment_workspace_folders = { "~/Documents/b_workspace/bCrawlers/newCrawler", "~/Documents/ps_workspace/gen.nvim" }

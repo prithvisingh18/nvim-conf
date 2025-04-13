@@ -45,3 +45,21 @@ end, { desc = "Toggle Inlay Hints" })
 vim.opt.sidescroll = 1
 
 
+-- Map Option + Down Arrow to Ctrl+E (scroll down)
+vim.keymap.set('n', '<M-Down>', '<C-E>', { noremap = true })
+vim.keymap.set('n', '<M-j>', '<C-E>', { noremap = true })
+
+-- Map Option + Up Arrow to Ctrl+Y (scroll up)
+vim.keymap.set('n', '<M-Up>', '<C-Y>', { noremap = true })
+vim.keymap.set('n', '<M-k>', '<C-E>', { noremap = true })
+
+-- Map Option + Right Arrow to scroll right
+vim.keymap.set('n', '<M-Right>', 'zl', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-l>', 'zl', { noremap = true, silent = true })
+
+-- Map Option + Left Arrow to scroll left
+vim.keymap.set('n', '<M-h>', 'zh', { noremap = true, silent = true })
+
+
+
+
