@@ -51,7 +51,7 @@ vim.keymap.set('n', '<M-j>', '<C-E>', { noremap = true })
 
 -- Map Option + Up Arrow to Ctrl+Y (scroll up)
 vim.keymap.set('n', '<M-Up>', '<C-Y>', { noremap = true })
-vim.keymap.set('n', '<M-k>', '<C-E>', { noremap = true })
+vim.keymap.set('n', '<M-k>', '<C-Y>', { noremap = true })
 
 -- Map Option + Right Arrow to scroll right
 vim.keymap.set('n', '<M-Right>', 'zl', { noremap = true, silent = true })
