@@ -58,6 +58,7 @@ vim.keymap.set('n', '<M-Right>', 'zl', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-l>', 'zl', { noremap = true, silent = true })
 
 -- Map Option + Left Arrow to scroll left
+vim.keymap.set('n', '<M-Left>', 'zh', { noremap = true, silent = true })
 vim.keymap.set('n', '<M-h>', 'zh', { noremap = true, silent = true })
 
 

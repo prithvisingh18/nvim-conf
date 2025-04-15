@@ -57,7 +57,6 @@ local lsp_zero = require("lsp-zero")
 -- if there is a language server active in the file
 local lsp_attach = function(client, bufnr)
 	local opts = { buffer = bufnr }
-
 	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
@@ -111,8 +110,17 @@ cmp.setup({
 -- Neo format
 vim.api.nvim_set_keymap("n", "<leader>nf", ":Neoformat<CR>", { noremap = true, silent = true })
 
+vim.filetype.add({ extension = { ejs = "html" } })
 -- Neoformat use local prettier rather than global one.
 vim.g.neoformat_try_node_exe = 1
+
+-- Consifer ejs as html
+vim.g.neoformat_ejs_prettier = {
+	exe = "prettier",
+	args = { "--parser", "html" },
+	stdin = 1,
+}
+vim.g.neoformat_enabled_ejs = { "prettier" }
 
 -- Neoformat JS
 -- https://prettier.io/docs/en/vim
@@ -120,6 +128,8 @@ vim.g.neoformat_try_node_exe = 1
 vim.g.neoformat_enabled_typescript = { "prettier" }
 vim.g.neoformat_enabled_javascript = { "prettier" }
 vim.g.neoformat_enabled_json = { "prettier" }
+vim.g.neoformat_enables_html = { "prettier" }
+vim.g.neoformat_enables_lua = { "stylua" }
 
 -- https://pypi.org/project/autopep8/
 -- pip install --upgrade autopep8
@@ -213,4 +223,5 @@ require("telescope").setup({
 require("telescope").load_extension("ui-select")
 
 -- Augment code confuguration
-vim.g.augment_workspace_folders = { "~/Documents/b_workspace/bCrawlers/newCrawler", "~/Documents/ps_workspace/gen.nvim" }
+vim.g.augment_workspace_folders =
+	{ "~/Documents/b_workspace/bCrawlers/newCrawler", "~/Documents/ps_workspace/gen.nvim" }
