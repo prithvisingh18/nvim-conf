@@ -55,9 +55,8 @@ local lsp_zero = require("lsp-zero")
 
 -- lsp_attach is where you enable features that only work
 -- if there is a language server active in the file
-local lsp_attach = function(client, bufnr)
+local lsp_attach = function(_, bufnr)
 	local opts = { buffer = bufnr }
-
 	vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 	vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 	vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
@@ -91,6 +90,17 @@ require("mason-lspconfig").setup({
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint" })
+
+lsp_zero.configure('rust_analyzer', {
+    settings = {
+        ['rust-analyzer'] = {
+            cachePriming = {
+                enable = false
+            }
+        }
+    }
+})
+
 
 -- Setup auto complete
 local cmp = require("cmp")

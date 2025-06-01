@@ -87,6 +87,9 @@ return {
 	},
 	{
 		"David-Kunz/gen.nvim",
+		-- "prithvisingh18/gen.nvim",
+		-- dir = "~/Documents/ps_workspace/gen.nvim",
+		branch = "no-split",
 		opts = {
 			model = "deepseek-r1:8b",
 			display_mode = "horizontal-split",

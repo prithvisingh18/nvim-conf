@@ -42,3 +42,35 @@ vim.keymap.set('n', '<leader>ih', function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle Inlay Hints" })
 
+vim.opt.sidescroll = 1
+
+-- Map Option + Down Arrow to Ctrl+E (scroll down)
+vim.keymap.set('n', '<M-Down>', '<C-E>', { noremap = true })
+vim.keymap.set('n', '<C-j>', '<C-E>', { noremap = true })
+
+-- Map Option + Up Arrow to Ctrl+Y (scroll up)
+vim.keymap.set('n', '<M-Up>', '<C-Y>', { noremap = true })
+vim.keymap.set('n', '<C-k>', '<C-Y>', { noremap = true })
+
+-- Map Option + Right Arrow to scroll right
+vim.keymap.set('n', '<M-Right>', 'zl', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-l>', 'zl', { noremap = true, silent = true })
+
+-- Map Option + Left Arrow to scroll left
+vim.keymap.set('n', '<M-Left>', 'zh', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-h>', 'zh', { noremap = true, silent = true })
+
+
+-- NeoVide configuration
+if vim.g.neovide then
+  local opts = { noremap = true }
+
+  vim.keymap.set('v', '<S-C>', '"+y', opts)
+  vim.keymap.set('n', '<S-V>', 'l"+P', opts)
+  vim.keymap.set('v', '<S-V>', '"+P', opts)
+  vim.keymap.set('c', '<S-V>', '<C-o>l<C-o>"+<C-o>P<C-o>l', opts)
+  vim.keymap.set('i', '<S-V>', '<ESC>l"+Pli', opts)
+  vim.keymap.set('t', '<S-V>', '<C-\\><C-n>"+Pi', opts)
+end
+
+
