@@ -7,7 +7,7 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
 vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers left reveal<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem position=float<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem position=left<CR>")
 vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
 vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
 
@@ -88,9 +88,6 @@ require("mason-lspconfig").setup({
 	},
 })
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint" })
-
 lsp_zero.configure('rust_analyzer', {
     settings = {
         ['rust-analyzer'] = {
@@ -101,6 +98,8 @@ lsp_zero.configure('rust_analyzer', {
     }
 })
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "zls", "dprint" })
 
 -- Setup auto complete
 local cmp = require("cmp")
