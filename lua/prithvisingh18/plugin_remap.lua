@@ -222,6 +222,7 @@ require("telescope").setup({
 -- load_extension, somewhere after setup function:
 require("telescope").load_extension("ui-select")
 
--- Augment code confuguration
-vim.g.augment_workspace_folders =
-	{ "~/Documents/b_workspace/bCrawlers/newCrawler", "~/Documents/ps_workspace/gen.nvim" }
+-- Gen keymaps
+vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>]]", ":Gen Chat<CR>")
+

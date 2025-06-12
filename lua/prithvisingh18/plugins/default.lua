@@ -1,7 +1,7 @@
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
+		branch = "v0.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
@@ -45,6 +45,8 @@ return {
 					"rust",
 					"python",
 					"zig",
+					"markdown",
+					"markdown_inline",
 					-- "toml"
 				},
 				sync_install = false,
@@ -86,15 +88,21 @@ return {
 		opts = {},
 	},
 	{
-		-- "David-Kunz/gen.nvim",
+		"David-Kunz/gen.nvim",
 		-- "prithvisingh18/gen.nvim",
-		dir = "~/Documents/ps_workspace/gen.nvim",
-		branch = "no-split",
+		-- dir = "~/Documents/ps_workspace/gen.nvim",
+		-- branch = "no-split",
 		opts = {
 			model = "deepseek-r1:8b",
-			display_mode = "no-split",
+			display_mode = "split",
 			show_prompt = "full",
 			show_model = true,
+			quit_map = "q", -- set keymap to close the response window
+			retry_map = "<c-r>", -- set keymap to re-send the current prompt
+			accept_map = "<c-cr>", -- set keymap to replace the previous selection with the last result
+			no_auto_close = false, -- Never closes the window automatically.
+			file = true, -- Write the payload to a temporary file to keep the command short.
+			hidden = false, -- Hide the generation window (if true, will implicitly set `prompt.replace = true`), requires Neovim >= 0.10
 		},
 	},
 	{
@@ -123,9 +131,4 @@ return {
 	-- 	version = "^1.0.0", -- optional: only update when a new 1.x version is released
 	-- },
 	{ "nvim-telescope/telescope-ui-select.nvim" },
-	-- { "augmentcode/augment.vim" },
-	-- {
-	-- 	"Exafunction/codeium.vim",
-	-- 	event = "BufEnter",
-	-- },
 }
