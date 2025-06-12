@@ -6,10 +6,10 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 --vim.g.loaded_netrwPlugin = 1
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-vim.keymap.set("n", "<leader>bl", ":Neotree focus buffers left reveal<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree focus filesystem left reveal<CR>")
-vim.keymap.set("n", "<leader>bg", ":Neotree focus git_status<CR>")
-vim.keymap.set("n", "<leader>ba", ":Neotree focus last<CR>")
+vim.keymap.set("n", "<leader>bl", ":Neotree toggle buffers left reveal<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree toggle filesystem left reveal<CR>")
+vim.keymap.set("n", "<leader>bg", ":Neotree toggle git_status<CR>")
+vim.keymap.set("n", "<leader>ba", ":Neotree toggle last<CR>")
 
 require("neo-tree").setup({
 	filesystem = {
