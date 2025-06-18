@@ -6,10 +6,16 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 --vim.g.loaded_netrwPlugin = 1
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-vim.keymap.set("n", "<leader>bl", ":Neotree toggle buffers left reveal<CR>")
-vim.keymap.set("n", "<leader>bf", ":Neotree toggle filesystem left reveal<CR>")
-vim.keymap.set("n", "<leader>bg", ":Neotree toggle git_status<CR>")
-vim.keymap.set("n", "<leader>ba", ":Neotree toggle last<CR>")
+vim.keymap.set("n", "<leader>bl", ":Neotree reveal buffers right reveal<CR>")
+vim.keymap.set("n", "<leader>blc", ":Neotree reveal buffers float reveal<CR>")
+vim.keymap.set("n", "<leader>bll", ":Neotree reveal buffers left reveal<CR>")
+
+vim.keymap.set("n", "<leader>bf", ":Neotree reveal filesystem right reveal<CR>")
+vim.keymap.set("n", "<leader>bfc", ":Neotree reveal filesystem float reveal<CR>")
+vim.keymap.set("n", "<leader>bfl", ":Neotree reveal filesystem left reveal<CR>")
+
+vim.keymap.set("n", "<leader>bg", ":Neotree reveal git_status<CR>")
+vim.keymap.set("n", "<leader>ba", ":Neotree reveal last<CR>")
 
 require("neo-tree").setup({
 	filesystem = {
@@ -18,7 +24,8 @@ require("neo-tree").setup({
 		use_libuv_file_watcher = true, -- Watch for changes in the filesystem
 	},
 	window = {
-		position = "left",
+		position = "right",
+		width = 0.35,
 		mappings = {
 			["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
 			["J"] = function(state)
@@ -89,7 +96,12 @@ require("mason-lspconfig").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint" })
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint", "angularhtml" })
+vim.filetype.add({
+	pattern = {
+		[".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+	},
+})
 
 -- Setup auto complete
 local cmp = require("cmp")
@@ -225,4 +237,3 @@ require("telescope").load_extension("ui-select")
 -- Gen keymaps
 vim.keymap.set({ "n", "v" }, "<leader>]", ":Gen<CR>")
 vim.keymap.set({ "n", "v" }, "<leader>]]", ":Gen Chat<CR>")
-

@@ -1,12 +1,12 @@
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v0.x",
+		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 			"MunifTanjim/nui.nvim",
-			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+			"3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 		},
 	},
 	{
@@ -47,6 +47,7 @@ return {
 					"zig",
 					"markdown",
 					"markdown_inline",
+					"angular",
 					-- "toml"
 				},
 				sync_install = false,
@@ -77,7 +78,7 @@ return {
 		config = function()
 			require("zen-mode").setup({
 				window = {
-					width = 120, -- Adjust the width to your liking
+					width = 0.70, -- Adjust the width to your liking
 				},
 			})
 		end,
@@ -131,4 +132,15 @@ return {
 	-- 	version = "^1.0.0", -- optional: only update when a new 1.x version is released
 	-- },
 	{ "nvim-telescope/telescope-ui-select.nvim" },
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {},
+        -- stylua: ignore
+        keys = {
+            { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+            { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+        },
+	},
 }
