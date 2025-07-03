@@ -6,13 +6,13 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 --vim.g.loaded_netrwPlugin = 1
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
-vim.keymap.set("n", "<leader>bl", ":Neotree reveal buffers right reveal<CR>")
-vim.keymap.set("n", "<leader>blc", ":Neotree reveal buffers float reveal<CR>")
-vim.keymap.set("n", "<leader>bll", ":Neotree reveal buffers left reveal<CR>")
+vim.keymap.set("n", "<leader>bl", ":Neotree reveal buffers left<CR>")
+vim.keymap.set("n", "<leader>blc", ":Neotree reveal buffers float<CR>")
+vim.keymap.set("n", "<leader>bll", ":Neotree reveal buffers right<CR>")
 
-vim.keymap.set("n", "<leader>bf", ":Neotree reveal filesystem right reveal<CR>")
-vim.keymap.set("n", "<leader>bfc", ":Neotree reveal filesystem float reveal<CR>")
-vim.keymap.set("n", "<leader>bfl", ":Neotree reveal filesystem left reveal<CR>")
+vim.keymap.set("n", "<leader>bf", ":Neotree reveal filesystem left<CR>")
+vim.keymap.set("n", "<leader>bfc", ":Neotree reveal filesystem float<CR>")
+vim.keymap.set("n", "<leader>bfl", ":Neotree reveal filesystem right<CR>")
 
 vim.keymap.set("n", "<leader>bg", ":Neotree reveal git_status<CR>")
 vim.keymap.set("n", "<leader>ba", ":Neotree reveal last<CR>")
@@ -24,8 +24,8 @@ require("neo-tree").setup({
 		use_libuv_file_watcher = true, -- Watch for changes in the filesystem
 	},
 	window = {
-		position = "right",
-		width = 0.35,
+		position = "left",
+		width = 0.3,
 		mappings = {
 			["P"] = { "toggle_preview", config = { use_float = false, use_image_nvim = true } },
 			["J"] = function(state)
@@ -96,12 +96,12 @@ require("mason-lspconfig").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint", "angularhtml" })
-vim.filetype.add({
-	pattern = {
-		[".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
-	},
-})
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint", "angularls" })
+-- vim.filetype.add({
+-- 	pattern = {
+-- 		[".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+-- 	},
+-- })
 
 -- Setup auto complete
 local cmp = require("cmp")
