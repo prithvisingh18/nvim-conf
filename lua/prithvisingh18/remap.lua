@@ -15,6 +15,9 @@ vim.keymap.set("n", "<leader>bc", ":%bd|e#<CR>")
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
+vim.keymap.set("n", "<leader>%", ":vsplit<CR>")
+vim.keymap.set("n", "<leader>\"", ":split<CR>")
+
 
 vim.keymap.set("n", "<leader>t2", ":set tabstop=2 shiftwidth=2 expandtab<CR>")
 vim.keymap.set("n", "<leader>t4", ":set tabstop=4 shiftwidth=4 expandtab<CR>")
@@ -42,7 +45,7 @@ vim.keymap.set("n", "<leader><Tab>x", ":tabclose<CR>")
 
 -- Toggle inlay hints with a shortcut
 vim.keymap.set("n", "<leader>ih", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle Inlay Hints" })
 
 vim.opt.sidescroll = 1
@@ -65,22 +68,22 @@ vim.keymap.set("n", "<M-h>", "zh", { noremap = true, silent = true })
 
 -- This helps in maintaining folds even after we leave the buffer
 local patterns = {
-	"*.ts",
-	"*.c",
-	"*.rs",
-	"*.js",
-	"*.lua",
+    "*.ts",
+    "*.c",
+    "*.rs",
+    "*.js",
+    "*.lua",
 }
 vim.api.nvim_create_autocmd("BufWinLeave", {
-	pattern = patterns,
-	callback = function()
-		vim.cmd("mkview")
-	end,
+    pattern = patterns,
+    callback = function()
+        vim.cmd("mkview")
+    end,
 })
 
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	pattern = patterns,
-	callback = function()
-		vim.cmd("silent! loadview")
-	end,
+    pattern = patterns,
+    callback = function()
+        vim.cmd("silent! loadview")
+    end,
 })
