@@ -96,7 +96,7 @@ require("mason-lspconfig").setup({
 })
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint", "angularls" })
+lsp_zero.setup_servers({ "ts_ls", "lua_ls", "pylsp", "rust_analyzer", "zls", "dprint", "angularls", "yls" })
 -- vim.filetype.add({
 -- 	pattern = {
 -- 		[".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
@@ -132,6 +132,14 @@ vim.g.neoformat_ejs_prettier = {
 	args = { "--parser", "html" },
 	stdin = 1,
 }
+
+vim.g.neoformat_yaml_yamlfmt = {
+	exe = "yamlfmt",
+	args = {},
+	stdin = 1,
+	replace = 1,
+}
+
 vim.g.neoformat_enabled_ejs = { "prettier" }
 
 -- Neoformat JS
@@ -148,7 +156,32 @@ vim.g.neoformat_enables_lua = { "stylua" }
 vim.g.neoformat_enabled_python = { "autopep8" }
 
 -- Theme
-vim.cmd.colorscheme("tokyonight-night")
+-- vim.cmd.colorscheme("tokyonight-storm")
+-- Default options:
+require("gruvbox").setup({
+	terminal_colors = true, -- add neovim terminal colors
+	undercurl = true,
+	underline = true,
+	bold = true,
+	italic = {
+		strings = true,
+		emphasis = true,
+		comments = true,
+		operators = false,
+		folds = true,
+	},
+	strikethrough = true,
+	invert_selection = false,
+	invert_signs = false,
+	invert_tabline = false,
+	inverse = true, -- invert background for search, diffs, statuslines and errors
+	contrast = "", -- can be "hard", "soft" or empty string
+	palette_overrides = {},
+	overrides = {},
+	dim_inactive = false,
+	transparent_mode = false,
+})
+vim.cmd("colorscheme gruvbox")
 
 -- Git diff view
 vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")
