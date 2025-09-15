@@ -13,6 +13,13 @@ vim.keymap.set("n", "<leader>,", vim.cmd.bprevious)
 vim.keymap.set("n", "<leader>ln", ":set number<CR>")
 vim.keymap.set("n", "<leader>bc", ":%bd|e#<CR>")
 
+vim.keymap.set("n", "<leader>w", function()
+	vim.opt.wrap = true
+end)
+vim.keymap.set("n", "<leader>nw", function()
+	vim.opt.wrap = false
+end)
+
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
 
 vim.keymap.set("n", "<leader>%", ":vsplit<CR>")
@@ -156,13 +163,10 @@ vim.keymap.set("n", "<leader>s", enter_scroll_mode, { noremap = true, silent = t
 -- vim.o.statusline = "%!v:lua.my_statusline()"
 --
 
-
 -- Move cursor to middle of current screen without scrolling
 vim.keymap.set("n", "zm", function()
-  local win_height = vim.api.nvim_win_get_height(0)
-  local top_line = vim.fn.line("w0")
-  local middle_line = top_line + math.floor(win_height / 2)
-  vim.api.nvim_win_set_cursor(0, { middle_line, 0 })
+	local win_height = vim.api.nvim_win_get_height(0)
+	local top_line = vim.fn.line("w0")
+	local middle_line = top_line + math.floor(win_height / 2)
+	vim.api.nvim_win_set_cursor(0, { middle_line, 0 })
 end, { desc = "Move cursor to middle of current screen" })
-
-
