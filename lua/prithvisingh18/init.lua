@@ -12,4 +12,8 @@ require("prithvisingh18.lazy")
 -- Remap plugin related shortcuts
 require("prithvisingh18.plugin_remap")
 
+require("prithvisingh18.config.lsp")
+
+require("prithvisingh18.config.cmp")
+
 print("Configured.")
