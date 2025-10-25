@@ -27,7 +27,7 @@ require("mason").setup()
 
 -- 2️⃣ Auto-install + setup servers via Mason-LSPConfig
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "ts_ls", "html", "bashls" },
+	ensure_installed = { "pyright", "ts_ls", "html", "bashls", "rust_analyzer" },
 	handlers = {
 		-- Default setup for all servers
 		function(server)
@@ -61,4 +61,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-
