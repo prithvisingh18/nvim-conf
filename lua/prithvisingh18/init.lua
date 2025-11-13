@@ -17,3 +17,4 @@ require("prithvisingh18.config.lsp")
 require("prithvisingh18.config.cmp")
 
 print("Configured.")
+

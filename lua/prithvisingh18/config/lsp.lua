@@ -27,7 +27,12 @@ require("mason").setup()
 
 -- 2️⃣ Auto-install + setup servers via Mason-LSPConfig
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "ts_ls", "html", "bashls", "rust_analyzer" },
+	ensure_installed = { "pyright", "ts_ls", "html", "bashls", "rust_analyzer", "angularls" },
+	automatic_enable = {
+		exclude = {
+			"angularls",
+		},
+	},
 	handlers = {
 		-- Default setup for all servers
 		function(server)

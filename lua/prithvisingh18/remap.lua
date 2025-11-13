@@ -68,7 +68,7 @@ vim.keymap.set("n", "<S-Tab>", "<C-E>", { noremap = true })
 vim.keymap.set("n", "<M-Up>", "<C-Y>", { noremap = true })
 vim.keymap.set("n", "<M-k>", "<C-Y>", { noremap = true })
 vim.keymap.set("n", "<S-p>", "<C-Y>", { noremap = true })
-vim.keymap.set("n", "<C-S-Tab>", "<C-Y>", { noremap = true })
+vim.keymap.set("n", "<M-S-Tab>", "<C-Y>", { noremap = true })
 
 -- Map Option + Right Arrow to scroll right
 vim.keymap.set("n", "<M-Right>", "zl", { noremap = true, silent = true })
