@@ -30,7 +30,11 @@ vim.keymap.set("n", "<leader>t4", ":set tabstop=4 shiftwidth=4 expandtab<CR>")
 
 -- Folding settings
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.lsp.foldexpr()"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+-- vim.opt_local.foldmethod = "expr"
+-- vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- This sets the default fold level
 vim.opt.foldlevel = 0

@@ -1,49 +1,3 @@
--- ==============================
--- Modern Neovim 0.11+ LSP Setup
--- ==============================
-
--- vim.lsp.config["luals"] = {
--- 	-- Command and arguments to start the server.
--- 	cmd = { "lua-language-server" },
--- 	-- Filetypes to automatically attach to.
--- 	filetypes = { "lua" },
--- 	-- Sets the "workspace" to the directory where any of these files is found.
--- 	-- Files that share a root directory will reuse the LSP server connection.
--- 	-- Nested lists indicate equal priority, see |vim.lsp.Config|.
--- 	root_markers = { { ".luarc.json", ".luarc.jsonc" }, ".git" },
--- 	-- Specific settings to send to the server. The schema is server-defined.
--- 	-- Example: https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json
--- 	settings = {
--- 		Lua = {
--- 			runtime = {
--- 				version = "LuaJIT",
--- 			},
--- 		},
--- 	},
--- }
---
--- 1️⃣ Mason: Installer for language servers
-require("mason").setup()
-
--- 2️⃣ Auto-install + setup servers via Mason-LSPConfig
-require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "ts_ls", "html", "bashls", "rust_analyzer", "angularls" },
-	automatic_enable = {
-		exclude = {
-			"angularls",
-		},
-	},
-	handlers = {
-		-- Default setup for all servers
-		function(server)
-			vim.lsp.config[server].setup({
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
-			})
-		end,
-	},
-})
---
--- 3️⃣ Custom keymaps for LSP actions
 local on_attach = function(_, bufnr)
 	local opts = { buffer = bufnr, silent = true, noremap = true }
 	local map = vim.keymap.set
@@ -57,12 +11,61 @@ local on_attach = function(_, bufnr)
 	map("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 end
 
--- Optional: attach keymaps automatically to every LSP buffer
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client then
-			on_attach(client, args.buf)
-		end
+-- Configure a server via `vim.lsp.config()` or `{after/}lsp/lua_ls.lua`
+vim.lsp.config("lua_ls", {
+	on_attach = on_attach,
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				globals = {
+					"vim",
+					"require",
+				},
+			},
+		},
+	},
+})
+
+vim.lsp.config("ts_ls", {
+	-- Use your existing on_attach function
+	on_attach = on_attach, -- ASSUMING you move on_attach to a separate file
+	-- Pass capabilities to the server
+	capabilities = require("cmp_nvim_lsp").default_capabilities(),
+	-- Add ts_ls specific settings here
+	settings = {
+		typescript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "all",
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+			},
+		},
+		javascript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "all",
+				-- Use similar settings for javascript here
+			},
+		},
+	},
+})
+
+vim.lsp.config("angularls", {
+	root_dir = function(filename)
+		return vim.fs.root(filename, { "angular.json", "project.json", "nx.json" }) or vim.loop.cwd()
 	end,
 })
+
+require("mason").setup()
+-- Note: `nvim-lspconfig` needs to be in 'runtimepath' by the time you set up mason-lspconfig.nvim
+require("mason-lspconfig").setup({
+	ensure_installed = { "pyright", "ts_ls", "html", "bashls", "rust_analyzer", "angularls" },
+})
+
