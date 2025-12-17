@@ -133,6 +133,12 @@ vim.g.neoformat_ejs_prettier = {
 	stdin = 1,
 }
 
+vim.g.neoformat_rust_rustfmt = {
+	exe = "rustfmt",
+	args = { "--edition", "2024" },
+	stdin = 1,
+}
+
 vim.g.neoformat_yaml_yamlfmt = {
 	exe = "yamlfmt",
 	args = {},
@@ -148,12 +154,13 @@ vim.g.neoformat_enabled_ejs = { "prettier" }
 vim.g.neoformat_enabled_typescript = { "prettier" }
 vim.g.neoformat_enabled_javascript = { "prettier" }
 vim.g.neoformat_enabled_json = { "prettier" }
-vim.g.neoformat_enables_html = { "prettier" }
+vim.g.neoformat_enabled_html = { "prettier" }
 -- vim.g.neoformat_enables_lua = { "stylua" }
 
 -- https://pypi.org/project/autopep8/
 -- pip install --upgrade autopep8
 vim.g.neoformat_enabled_python = { "autopep8" }
+vim.g.neoformat_enabled_rust = { "rustfmt" }
 
 -- Theme
 -- vim.cmd.colorscheme("tokyonight-storm")

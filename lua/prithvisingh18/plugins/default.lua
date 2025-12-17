@@ -95,6 +95,15 @@ return {
 		main = "ibl",
 		opts = {},
 	},
+    {
+        "koushikxd/resu.nvim",
+        dependencies = {
+            "sindrets/diffview.nvim",
+        },
+        config = function()
+            require("resu").setup()
+        end,
+    },
 	-- {
 	-- 	"David-Kunz/gen.nvim",
 	-- 	-- "prithvisingh18/gen.nvim",
