@@ -95,15 +95,59 @@ return {
 		main = "ibl",
 		opts = {},
 	},
-    {
-        "koushikxd/resu.nvim",
-        dependencies = {
-            "sindrets/diffview.nvim",
-        },
-        config = function()
-            require("resu").setup()
-        end,
-    },
+	{
+		"coder/claudecode.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"folke/snacks.nvim", -- Optional, but recommended for UI elements
+		},
+		opts = {
+			terminal = {
+				-- "none" means you will run `claude --ide` in an external terminal/tmux
+				provider = "none",
+			},
+			-- If 'claude' isn't in your system PATH, uncomment and set the path below:
+			-- terminal_cmd = "/usr/local/bin/claude",
+		},
+		keys = {
+			-- Essential keys for the external workflow
+			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Claude: Deny Diff" },
+			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Claude: Accept Diff" },
+			-- Since provider is "none", this command starts the Neovim side of the bridge
+			{ "<leader>as", "<cmd>ClaudeCode<cr>", desc = "Claude: Start Bridge" },
+		},
+	},
+	-- {
+	-- 	"koushikxd/resu.nvim",
+	-- 	-- dependencies = {
+	-- 	-- 	"sindrets/diffview.nvim",
+	-- 	-- },
+	-- 	config = function()
+	-- 		require("resu").setup({
+	-- 			use_diffview = false,
+	-- 			hot_reload = true,
+	-- 			debounce_ms = 100,
+	-- 			watch_dir = nil,
+	-- 			ignored_files = {
+	-- 				"%.git/",
+	-- 				"node_modules/",
+	-- 				"dist/",
+	-- 				"build/",
+	-- 				"%.DS_Store",
+	-- 				"%.swp",
+	-- 			},
+	-- 			keymaps = {
+	-- 				toggle = "<leader>rt",
+	-- 				accept = "<leader>ra",
+	-- 				decline = "<leader>rd",
+	-- 				accept_all = "<leader>rA",
+	-- 				decline_all = "<leader>rD",
+	-- 				refresh = "<leader>rr",
+	-- 				quit = "q",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	-- {
 	-- 	"David-Kunz/gen.nvim",
 	-- 	-- "prithvisingh18/gen.nvim",
