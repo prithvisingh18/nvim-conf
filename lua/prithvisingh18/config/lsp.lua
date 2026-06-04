@@ -1,4 +1,4 @@
-local servers = { "basedpyright", "pyright", "ts_ls", "html", "bashls", "rust_analyzer", "angularls" }
+local servers = { "basedpyright", "ts_ls", "html", "bashls", "rust_analyzer", "angularls" }
 
 local on_attach = function(_, bufnr)
 	local opts = { buffer = bufnr, silent = true, noremap = true }
@@ -94,6 +94,9 @@ vim.lsp.config("basedpyright", {
 	-- Pass capabilities to the server
 	capabilities = require("cmp_nvim_lsp").default_capabilities(),
 	settings = {
+		-- python = {
+		-- 	pythonPath = vim.fn.getcwd() .. "/venv/bin/python3",
+		-- },
 		basedpyright = {
 			analysis = {
 				-- Enable general diagnostic mode

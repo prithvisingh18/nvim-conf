@@ -31,7 +31,14 @@ return {
 	-- 	},
 	-- },
 	-- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+	-- { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			vim.cmd("colorscheme rose-pine")
+		end,
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -95,28 +102,28 @@ return {
 		main = "ibl",
 		opts = {},
 	},
-	{
-		"coder/claudecode.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"folke/snacks.nvim", -- Optional, but recommended for UI elements
-		},
-		opts = {
-			terminal = {
-				-- "none" means you will run `claude --ide` in an external terminal/tmux
-				provider = "none",
-			},
-			-- If 'claude' isn't in your system PATH, uncomment and set the path below:
-			-- terminal_cmd = "/usr/local/bin/claude",
-		},
-		keys = {
-			-- Essential keys for the external workflow
-			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Claude: Deny Diff" },
-			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Claude: Accept Diff" },
-			-- Since provider is "none", this command starts the Neovim side of the bridge
-			{ "<leader>as", "<cmd>ClaudeCode<cr>", desc = "Claude: Start Bridge" },
-		},
-	},
+	-- {
+	-- 	"coder/claudecode.nvim",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"folke/snacks.nvim", -- Optional, but recommended for UI elements
+	-- 	},
+	-- 	opts = {
+	-- 		terminal = {
+	-- 			-- "none" means you will run `claude --ide` in an external terminal/tmux
+	-- 			provider = "none",
+	-- 		},
+	-- 		-- If 'claude' isn't in your system PATH, uncomment and set the path below:
+	-- 		-- terminal_cmd = "/usr/local/bin/claude",
+	-- 	},
+	-- 	keys = {
+	-- 		-- Essential keys for the external workflow
+	-- 		{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Claude: Deny Diff" },
+	-- 		{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Claude: Accept Diff" },
+	-- 		-- Since provider is "none", this command starts the Neovim side of the bridge
+	-- 		{ "<leader>as", "<cmd>ClaudeCode<cr>", desc = "Claude: Start Bridge" },
+	-- 	},
+	-- },
 	-- {
 	-- 	"koushikxd/resu.nvim",
 	-- 	-- dependencies = {
@@ -168,28 +175,56 @@ return {
 	-- },
 	{
 		"karb94/neoscroll.nvim",
-		opts = {},
+
+		{
+			"karb94/neoscroll.nvim",
+			config = function()
+				require("neoscroll").setup({
+					-- Time telling the animation how long to take (in milliseconds)
+					easing = "quadratic", -- Smooth acceleration and deceleration
+					hide_cursor = true, -- Hide cursor while scrolling to prevent flickering
+					stop_eof = true, -- Stop scrolling at the end of the file
+					respect_scrolloff = false, -- Inside splits, ignore scrolloff boundaries
+					cursor_scrolls_alone = true, -- The cursor moves along with the screen
+
+					-- Global easing function presets: "linear", "quadratic", "cubic", "sine", "circular"
+					easing_function = "quadratic",
+				})
+				-- --- Smooth Scrolling Keymaps ---
+				local t = {}
+				-- Syntax: t['<Key>'] = { 'neoscroll_function', { 'arguments', 'move_cursor', 'duration' } }
+
+				-- Half-page movements (Extremely smooth)
+				t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "150", [["quadratic"]] } }
+				t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "150", [["quadratic"]] } }
+
+				-- Full-page movements
+				t["<C-b>"] = { "scroll", { "-vim.api.nvim_win_get_height(0)", "true", "250", [["quadratic"]] } }
+				t["<C-f>"] = { "scroll", { "vim.api.nvim_win_get_height(0)", "true", "250", [["quadratic"]] } }
+
+				-- Line-by-line scrolling adjustments (Keeps your cursor centered nicely)
+				t["<C-y>"] = { "scroll", { "-0.10", "false", "80" } }
+				t["<C-e>"] = { "scroll", { "0.10", "false", "80" } }
+
+				-- Classic Vim z-commands (Smooth redraw around cursor)
+				t["zt"] = { "zt", { "150" } }
+				t["zz"] = { "zz", { "150" } }
+				t["zb"] = { "zb", { "150" } }
+
+				-- --- MOUSE WHEEL SMOOTH SCROLLING MAPPINGS ---
+				-- Scroll up: moves view up slightly (0.10 of window height) over 50ms
+				t["<ScrollWheelUp>"] = { "scroll", { "-0.10", "false", "50", [["linear"]] } }
+				-- Scroll down: moves view down slightly over 50ms
+				t["<ScrollWheelDown>"] = { "scroll", { "0.10", "false", "50", [["linear"]] } }
+
+				require("neoscroll.config").set_mappings(t)
+			end,
+		},
 	},
 	-- {
 	-- 	"mrcjkb/rustaceanvim",
 	-- 	version = "^5", -- Recommended
 	-- 	lazy = false, -- This plugin is already lazy
-	-- },
-	-- {
-	-- 	"romgrk/barbar.nvim",
-	-- 	dependencies = {
-	-- 		"lewis6991/gitsigns.nvim", -- OPTIONAL: for git status
-	-- 		"nvim-tree/nvim-web-devicons", -- OPTIONAL: for file icons
-	-- 	},
-	-- 	init = function()
-	-- 		vim.g.barbar_auto_setup = false
-	-- 	end,
-	-- 	opts = {
-	-- 		sidebar_filetypes = {
-	-- 			["neo-tree"] = { event = "BufWipeout" },
-	-- 		},
-	-- 	},
-	-- 	version = "^1.0.0", -- optional: only update when a new 1.x version is released
 	-- },
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 	-- {
@@ -202,28 +237,41 @@ return {
 	--            { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
 	--        },
 	-- },
-	{
-		"f-person/git-blame.nvim",
-		-- load the plugin at startup
-		event = "VeryLazy",
-		-- Because of the keys part, you will be lazy loading this plugin.
-		-- The plugin will only load once one of the keys is used.
-		-- If you want to load the plugin at startup, add something like event = "VeryLazy",
-		-- or lazy = false. One of both options will work.
-		opts = {
-			-- your configuration comes here
-			-- for example
-			enabled = true, -- if you want to enable the plugin
-			message_template = " <summary> • <date> • <author> • <<sha>>", -- template for the blame message, check the Message template section for more options
-			date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
-			virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
-		},
-	},
+	-- {
+	-- 	"f-person/git-blame.nvim",
+	-- 	-- load the plugin at startup
+	-- 	event = "VeryLazy",
+	-- 	-- Because of the keys part, you will be lazy loading this plugin.
+	-- 	-- The plugin will only load once one of the keys is used.
+	-- 	-- If you want to load the plugin at startup, add something like event = "VeryLazy",
+	-- 	-- or lazy = false. One of both options will work.
+	-- 	opts = {
+	-- 		-- your configuration comes here
+	-- 		-- for example
+	-- 		enabled = true, -- if you want to enable the plugin
+	-- 		message_template = " <summary> • <date> • <author> • <<sha>>", -- template for the blame message, check the Message template section for more options
+	-- 		date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
+	-- 		virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
+	-- 	},
+	-- },
 	{
 		"3rd/image.nvim",
 		build = false, -- so that it doesn't build the rock https://github.com/3rd/image.nvim/issues/91#issuecomment-2453430239
 		opts = {
 			processor = "magick_cli",
 		},
+	},
+	{
+		"linux-cultist/venv-selector.nvim",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim", -- Requires a picker like Telescope
+		},
+		config = function()
+			require("venv-selector").setup({
+				-- Your configuration options here
+			})
+		end,
 	},
 }
