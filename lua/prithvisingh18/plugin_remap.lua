@@ -7,6 +7,7 @@ vim.keymap.set("n", "<leader>zm", ":ZenMode<CR>")
 
 -- vim.keymap.set("n", "<leader>b", vim.cmd.Neotree)
 vim.keymap.set("n", "<leader>bl", ":Neotree reveal buffers left<CR>")
+vim.keymap.set("n", "<leader>be", ":Neotree toggle position=current<CR>")
 vim.keymap.set("n", "<leader>blc", ":Neotree reveal buffers float<CR>")
 vim.keymap.set("n", "<leader>bll", ":Neotree reveal buffers right<CR>")
 
@@ -25,7 +26,7 @@ require("neo-tree").setup({
 	},
 	window = {
 		position = "left",
-		width = 0.3,
+		-- width = 0.3,
 		mappings = {
 			["P"] = { "toggle_preview", config = { use_float = true } },
 			["J"] = function(state)
@@ -163,7 +164,7 @@ vim.g.neoformat_enabled_python = { "autopep8" }
 vim.g.neoformat_enabled_rust = { "rustfmt" }
 
 -- Theme
--- vim.cmd.colorscheme("tokyonight-storm")
+vim.cmd.colorscheme("tokyonight-storm")
 -- Default options:
 -- require("gruvbox").setup({
 -- 	terminal_colors = true, -- add neovim terminal colors
@@ -186,12 +187,9 @@ vim.g.neoformat_enabled_rust = { "rustfmt" }
 -- 	palette_overrides = {},
 -- 	overrides = {},
 -- 	dim_inactive = false,
--- 	transparent_mode = false,
+-- 	transparent_mode = true,
 -- })
 -- vim.cmd("colorscheme gruvbox")
-
-
-
 
 -- Git diff view
 vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")
@@ -199,58 +197,30 @@ vim.keymap.set("n", "<leader>gd", ":DiffviewOpen<CR>")
 -- Setup vertical indentation lines
 require("ibl").setup()
 
-require("neoscroll").setup({
-	mappings = { -- Keys to be mapped to their corresponding default scrolling animation
-		"<C-u>",
-		"<C-d>",
-		"<C-b>",
-		"<C-f>",
-		"<C-y>",
-		"<C-e>",
-		"zt",
-		"zz",
-		"zb",
-	},
-	hide_cursor = true, -- Hide cursor while scrolling
-	stop_eof = true, -- Stop at <EOF> when scrolling downwards
-	respect_scrolloff = false, -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-	cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-	duration_multiplier = 1.0, -- Global duration multiplier
-	easing = "linear", -- Default easing function
-	pre_hook = nil, -- Function to run before the scrolling animation starts
-	post_hook = nil, -- Function to run after the scrolling animation ends
-	performance_mode = true, -- Disable "Performance Mode" on all buffers.
-	ignored_events = { -- Events ignored while scrolling
-		"WinScrolled",
-		"CursorMoved",
-	},
-})
-
-neoscroll = require("neoscroll")
-local keymap = {
-	["<C-s>"] = function()
-		neoscroll.scroll(-0.5, { move_cursor = true, duration = 50 })
-	end,
-	["<C-x>"] = function()
-		neoscroll.scroll(0.5, { move_cursor = true, duration = 50 })
-	end,
-}
-local modes = { "n", "v", "x" }
-for key, func in pairs(keymap) do
-	vim.keymap.set(modes, key, func)
-end
-
 -- Barbar mappings
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 -- Move to previous/next
-map("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
-map("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+map("n", "<A-,>", "<CMD>bnext<CR>", opts)
+map("n", "<A-.>", "<CMD>bprevious<CR>", opts)
 
 -- Telescope ui select setup
 -- This is your opts table
+local actions = require("telescope.actions")
 require("telescope").setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<Esc>"] = actions.close,
+				["<C-c>"] = actions.close,
+			},
+			n = {
+				["<Esc>"] = actions.close,
+				["q"] = actions.close,
+			},
+		},
+	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown({

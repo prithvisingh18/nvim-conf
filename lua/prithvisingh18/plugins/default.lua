@@ -18,27 +18,27 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	},
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	opts = {
-	-- 		transparent = true,
-	-- 		styles = {
-	-- 			sidebars = "transparent",
-	-- 			floats = "transparent",
-	-- 		},
-	-- 	},
-	-- },
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = true,
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		},
+	},
 	-- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	-- { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
-	},
+	-- {
+	-- 	"rose-pine/neovim",
+	-- 	name = "rose-pine",
+	-- 	config = function()
+	-- 		vim.cmd("colorscheme rose-pine")
+	-- 	end,
+	-- },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -181,43 +181,75 @@ return {
 			config = function()
 				require("neoscroll").setup({
 					-- Time telling the animation how long to take (in milliseconds)
-					easing = "quadratic", -- Smooth acceleration and deceleration
+					easing = "linear", -- Smooth acceleration and deceleration
 					hide_cursor = true, -- Hide cursor while scrolling to prevent flickering
 					stop_eof = true, -- Stop scrolling at the end of the file
 					respect_scrolloff = false, -- Inside splits, ignore scrolloff boundaries
 					cursor_scrolls_alone = true, -- The cursor moves along with the screen
-
 					-- Global easing function presets: "linear", "quadratic", "cubic", "sine", "circular"
-					easing_function = "quadratic",
+					easing_function = "linear",
+					duration_multiplier = 1.0, -- Global duration multiplier
+					pre_hook = nil, -- Function to run before the scrolling animation starts
+					post_hook = nil, -- Function to run after the scrolling animation ends
+					performance_mode = true, -- Disable "Performance Mode" on all buffers.
+					ignored_events = { -- Events ignored while scrolling
+						"WinScrolled",
+						"CursorMoved",
+					},
 				})
-				-- --- Smooth Scrolling Keymaps ---
-				local t = {}
-				-- Syntax: t['<Key>'] = { 'neoscroll_function', { 'arguments', 'move_cursor', 'duration' } }
+				local neoscroll = require("neoscroll")
+				local keymap = {
+					["<C-u>"] = function()
+						neoscroll.ctrl_u({ duration = 150, easing = "linear" })
+					end,
+					["<C-d>"] = function()
+						neoscroll.ctrl_d({ duration = 150, easing = "linear" })
+					end,
+					["<C-s>"] = function()
+						neoscroll.ctrl_u({ duration = 150, easing = "linear" })
+					end,
+					["<C-x>"] = function()
+						neoscroll.ctrl_d({ duration = 150, easing = "linear" })
+					end,
+					["<C-b>"] = function()
+						neoscroll.ctrl_b({ duration = 250, easing = "linear" })
+					end,
+					["<C-f>"] = function()
+						neoscroll.ctrl_f({ duration = 250, easing = "linear" })
+					end,
+					["<C-y>"] = function()
+						neoscroll.scroll(-0.10, { move_cursor = false, duration = 80 })
+					end,
+					["<C-e>"] = function()
+						neoscroll.scroll(0.10, { move_cursor = false, duration = 80 })
+					end,
+					["<M-k>"] = function()
+						neoscroll.scroll(-0.10, { move_cursor = false, duration = 80 })
+					end,
+					["<M-j>"] = function()
+						neoscroll.scroll(0.10, { move_cursor = false, duration = 80 })
+					end,
+					["zt"] = function()
+						neoscroll.zt({ half_win_duration = 150 })
+					end,
+					["zz"] = function()
+						neoscroll.zz({ half_win_duration = 150 })
+					end,
+					["zb"] = function()
+						neoscroll.zb({ half_win_duration = 150 })
+					end,
+					["<ScrollWheelUp>"] = function()
+						neoscroll.scroll(-0.10, { move_cursor = false, duration = 50, easing = "linear" })
+					end,
+					["<ScrollWheelDown>"] = function()
+						neoscroll.scroll(0.10, { move_cursor = false, duration = 50, easing = "linear" })
+					end,
+				}
 
-				-- Half-page movements (Extremely smooth)
-				t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "150", [["quadratic"]] } }
-				t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "150", [["quadratic"]] } }
-
-				-- Full-page movements
-				t["<C-b>"] = { "scroll", { "-vim.api.nvim_win_get_height(0)", "true", "250", [["quadratic"]] } }
-				t["<C-f>"] = { "scroll", { "vim.api.nvim_win_get_height(0)", "true", "250", [["quadratic"]] } }
-
-				-- Line-by-line scrolling adjustments (Keeps your cursor centered nicely)
-				t["<C-y>"] = { "scroll", { "-0.10", "false", "80" } }
-				t["<C-e>"] = { "scroll", { "0.10", "false", "80" } }
-
-				-- Classic Vim z-commands (Smooth redraw around cursor)
-				t["zt"] = { "zt", { "150" } }
-				t["zz"] = { "zz", { "150" } }
-				t["zb"] = { "zb", { "150" } }
-
-				-- --- MOUSE WHEEL SMOOTH SCROLLING MAPPINGS ---
-				-- Scroll up: moves view up slightly (0.10 of window height) over 50ms
-				t["<ScrollWheelUp>"] = { "scroll", { "-0.10", "false", "50", [["linear"]] } }
-				-- Scroll down: moves view down slightly over 50ms
-				t["<ScrollWheelDown>"] = { "scroll", { "0.10", "false", "50", [["linear"]] } }
-
-				require("neoscroll.config").set_mappings(t)
+				local modes = { "n", "v", "x" }
+				for key, func in pairs(keymap) do
+					vim.keymap.set(modes, key, func, { silent = true, noremap = true })
+				end
 			end,
 		},
 	},
