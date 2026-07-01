@@ -49,6 +49,7 @@ require("neo-tree").setup({
 
 -- Telescope setup
 local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>tc", ":Telescope current_buffer_fuzzy_find<CR>")
 vim.keymap.set("n", "<leader>tf", ":Telescope find_files theme=dropdown<CR>")
 vim.keymap.set("n", "<leader>tg", ":Telescope live_grep theme=dropdown<CR>")
 vim.keymap.set("n", "<leader>tb", ":Telescope buffers theme=dropdown<CR>")
